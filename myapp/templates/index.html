@@ -1,0 +1,433 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href=" {% static "style.css" %} ">
+  </head>
+  <body>
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!--
+                  Icon when menu is closed.
+      
+                  Menu open: "hidden", Menu closed: "block"
+                -->
+              <svg
+                class="block size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <!--
+                  Icon when menu is open.
+      
+                  Menu open: "block", Menu closed: "hidden"
+                -->
+              <svg
+                class="hidden size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+          >
+            <div class="flex shrink-0 items-center">
+              <img
+                class="h-8 w-auto"
+                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+                alt="Your Company"
+              />
+            </div>
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a
+                  href="#"
+                  class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  aria-current="page"
+                  >Home</a
+                >
+                <a
+                  href="#about"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >About</a
+                >
+                <a
+                  href="#contact"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Contect</a
+                >
+                <a
+                  href="#"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Portfolio</a
+                >
+                <a
+                  href="#"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Help</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          >
+            <button
+              type="button"
+              class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            >
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">View notifications</span>
+              <svg
+                class="size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                />
+              </svg>
+            </button>
+
+            <!-- Profile dropdown -->
+            <div class="relative ml-3 menu-photo">
+              <div class="menu-photo">
+                <button
+                  type="button"
+                  class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 menu-photo"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="size-8 rounded-full menu-photo"
+                    src="media/image.png"
+                    alt=""
+                  />
+                </button>
+              </div>
+
+              <!--
+                  Dropdown menu, show/hide based on menu state.
+      
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+              <div class="main">
+                <div
+                  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="user-menu-button"
+                  tabindex="-1"
+                >
+                  <!-- Active: "bg-gray-100 outline-none", Not Active: "" -->
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="user-menu-item-0"
+                    >Your Profile</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="user-menu-item-1"
+                    >Settings</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="user-menu-item-2"
+                    >Sign out</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a
+            href="#"
+            class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+            aria-current="page"
+            >Dashboard</a
+          >
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Team</a
+          >
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Projects</a
+          >
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Calendar</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-div">
+      <div class="text-div">
+        <h1 class="name">Chander Mohan Meena</h1>
+        <br />
+        <p class="para">
+          "Crafting seamless web solutions with Django: From frontend finesse to
+          backend brilliance! 🚀 Django full-stack development empowers you to
+          build dynamic, secure, and scalable applications. Combine Python's
+          robust backend with stunning, responsive frontends for end-to-end web
+          solutions. Perfect for powering startups, businesses, and innovative
+          ideas. Elevate user experiences and achieve development excellence!"
+        </p>
+      </div>
+
+      <div class="img-div">
+        <img class="main-img" src="media/image.png" alt="" />
+      </div>
+    </div>
+
+    <div class="main-about" id="about">
+      <h1 class="about-head1">About</h1>
+    </div>
+
+    <div class="text-about">
+      <center>**Becoming a Full-Stack Developer**</center>
+      <br />
+      A full-stack developer is a versatile professional capable of working on
+      both the front-end and back-end of applications, bridging the gap between
+      design and functionality. As a new full-stack developer, your journey will
+      involve learning the essential technologies and tools required to build
+      complete web applications. On the **front-end**, you’ll focus on creating
+      engaging user interfaces using HTML, CSS, and JavaScript, along with
+      frameworks like React.js or Angular for modern, dynamic web development.
+      Mastering responsive design ensures your applications look great on any
+      device. On the **back-end**, you’ll dive into server-side programming with
+      technologies like Node.js, Python (Django or Flask), or Ruby on Rails.
+      You’ll manage databases—whether SQL or NoSQL—to store and retrieve data
+      efficiently. To succeed as a full-stack developer, you’ll need to
+      understand how the front-end and back-end communicate, using APIs and
+      frameworks to build seamless interactions. Version control tools like Git,
+      deployment platforms, and cloud services are essential for managing
+      projects and launching applications. Building projects, from simple blogs
+      to complex e-commerce websites, will sharpen your skills and showcase your
+      ability to integrate technologies effectively. Keep learning, exploring,
+      and experimenting to thrive in this ever-evolving field. Full-stack
+      development is not just about coding—it’s about problem-solving,
+      creativity, and delivering solutions that users love. Embrace the
+      challenges and opportunities, and you’ll carve a rewarding career path in
+      this dynamic domain.
+    </div>
+
+      <div class="projects">
+
+        <div class="project-text">
+          <h1 class="project-head">Projects</h1>
+        </div>
+
+
+        {% comment %} First Row {% endcomment %}
+          <div class="project-list">
+            
+        <div class="project1">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://media.istockphoto.com/id/1464672040/photo/business-and-finance.webp?a=1&b=1&s=612x612&w=0&k=20&c=ki0isITL27JpL8Agk3IDTIuEvXO-_aPm5mjRmy5MtHs=" alt="">
+            </div>
+            <div class="project-content">
+                <h2 class="project-title">My Project Title</h2>
+                <p class="project-description">This is a brief description of the project. Highlight key features and functionality here.</p>
+                <div class="project-buttons">
+                    <a href="#" target="_blank">View Project</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="project2">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://media.istockphoto.com/id/2162617977/photo/2025-new-year-resolutions-on-notepad-with-coffee-and-laptop.webp?a=1&b=1&s=612x612&w=0&k=20&c=beSy5X_oOgYN7DmTS_bMSWT9PcUveP7O3oxBNIrQKVY=" alt="">
+            </div>
+            <div class="project-content">
+                <h2 class="project-title">My Project Title</h2>
+                <p class="project-description">This is a brief description of the project. Highlight key features and functionality here.</p>
+                <div class="project-buttons">
+                    <a href="#" target="_blank">View Project</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="project3">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://media.istockphoto.com/id/2162617977/photo/2025-new-year-resolutions-on-notepad-with-coffee-and-laptop.webp?a=1&b=1&s=612x612&w=0&k=20&c=beSy5X_oOgYN7DmTS_bMSWT9PcUveP7O3oxBNIrQKVY=" alt="">
+            </div>
+            <div class="project-content">
+                <h2 class="project-title">My Project Title</h2>
+                <p class="project-description">This is a brief description of the project. Highlight key features and functionality here.</p>
+                <div class="project-buttons">
+                    <a href="#" target="_blank">View Project</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+        </div>
+          </div>
+
+
+
+
+
+
+
+
+          {% comment %} Second Row {% endcomment %}
+          <div class="project-list">
+            
+        <div class="project1">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://media.istockphoto.com/id/1464672040/photo/business-and-finance.webp?a=1&b=1&s=612x612&w=0&k=20&c=ki0isITL27JpL8Agk3IDTIuEvXO-_aPm5mjRmy5MtHs=" alt="">
+            </div>
+            <div class="project-content">
+                <h2 class="project-title">My Project Title</h2>
+                <p class="project-description">This is a brief description of the project. Highlight key features and functionality here.</p>
+                <div class="project-buttons">
+                    <a href="#" target="_blank">View Project</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="project2">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://media.istockphoto.com/id/2162617977/photo/2025-new-year-resolutions-on-notepad-with-coffee-and-laptop.webp?a=1&b=1&s=612x612&w=0&k=20&c=beSy5X_oOgYN7DmTS_bMSWT9PcUveP7O3oxBNIrQKVY=" alt="">
+            </div>
+            <div class="project-content">
+                <h2 class="project-title">My Project Title</h2>
+                <p class="project-description">This is a brief description of the project. Highlight key features and functionality here.</p>
+                <div class="project-buttons">
+                    <a href="#" target="_blank">View Project</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="project3">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://media.istockphoto.com/id/2162617977/photo/2025-new-year-resolutions-on-notepad-with-coffee-and-laptop.webp?a=1&b=1&s=612x612&w=0&k=20&c=beSy5X_oOgYN7DmTS_bMSWT9PcUveP7O3oxBNIrQKVY=" alt="">
+            </div>
+            <div class="project-content">
+                <h2 class="project-title">My Project Title</h2>
+                <p class="project-description">This is a brief description of the project. Highlight key features and functionality here.</p>
+                <div class="project-buttons">
+                    <a href="#" target="_blank">View Project</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+        </div>
+          </div>
+
+      </div>
+
+
+
+
+
+
+      {% comment %} Contact US {% endcomment %}
+
+      <div class="contact" id="contact">
+        <div class="contact-form">
+          <h2>Contact Us</h2>
+          <form>
+              <div class="form-group">
+                  <input type="text" name="name" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                  <input type="email" name="email" placeholder="Your Email" required>
+              </div>
+              <div class="form-group">
+                  <textarea name="message" placeholder="Your Message" required></textarea>
+              </div>
+              <button type="submit">Send Message</button>
+          </form>
+      </div>
+      </div>
+  </body>
+</html>
